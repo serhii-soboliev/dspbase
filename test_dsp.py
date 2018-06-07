@@ -17,5 +17,5 @@ class TestDFT(unittest.TestCase):
 
     def test_re_im_length_2(self):
         re, im = dft(self.x_2)
-        self.assertEqual(re.size, 5)
-        self.assertEqual(im.size, 5)
+        self.assertEqual(re.size, 6)
+        self.assertEqual(im.size, 6)
