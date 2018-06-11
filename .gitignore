@@ -1,2 +1,3 @@
 /.idea/*
 /venv/*
+/com/sbk/dspbase/__pycache__/*
