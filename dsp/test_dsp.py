@@ -36,12 +36,6 @@ class TestDFT(unittest.TestCase):
         x_restored = i_dft(re, im)
         npt.assert_almost_equal(x, x_restored, decimal=2)
 
-    def test_compare_with_numpy(self):
-        x = self.build_sinus()
-        re, im = dft(x)
-        np_re = abs(np.fft.fft(x))
-        self.assertEqual(re[9], -9.3)
-
     def build_sinus(self, amplitude=1, freq=10, shift=0, n=64):
         sn = 10000
         st = np.arange(start=0, stop=sn, step=0.1)
