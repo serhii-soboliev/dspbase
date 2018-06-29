@@ -1,0 +1,6 @@
+IPython
+numpy==1.14.2
+matplotlib==2.1
+scipy==1.0.0
+pandas==0.21.1
+codecov
