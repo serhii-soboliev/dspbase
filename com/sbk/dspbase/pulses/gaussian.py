@@ -1,12 +1,14 @@
 import math
+
 import numpy as np
 
 
-def gaussian_pulse(signal_length=512,  peak_height=32, peak_angle_radian=math.pi/4, shift=0):
-    t = np.zeros(signal_length)
-    b = peak_height * np.arctan(peak_angle_radian)
-    t[int(shift):int(shift+b)] = np.linspace(start=0, stop=peak_height, num=b)
-    ramp_start = int(shift+b)
-    ramp_end = int(shift + 2*b)
-    t[ramp_start:ramp_end] = np.linspace(start=peak_height, stop=0, num=ramp_end-ramp_start)
-    return t
+def gaussian_pulse(signal_length=20, mean=0, deviation=1):
+    steps_count = 10
+    t1 = np.linspace(start=mean - signal_length / 2,
+                     stop=mean + signal_length / 2,
+                     num=steps_count * signal_length)
+    a = 1 / (deviation * ((2 * math.pi) ** 1/2))
+    b = ((t1 - mean) ** 2) / (2 * deviation)
+    t2 = a * np.exp(-b)
+    return t1, t2
