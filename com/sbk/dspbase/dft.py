@@ -30,3 +30,30 @@ def i_dft(re, im):
             x[i] += re[j] * cos(angle)
             x[i] += im[j] * sin(angle)
     return x
+
+
+def dft_complex(x):
+    x = np.asarray(x, dtype=float)
+    N = x.shape[0]
+    n = np.arange(N)
+    k = n.reshape((N, 1))
+    M = np.exp(-2j * np.pi * k * n / N)
+    return np.dot(M, x)
+
+
+def fft(x):
+    x = np.asarray(x, dtype=float)
+    N = x.shape[0]
+
+    if N % 2 > 0:
+        raise ValueError("size of x must be a power of 2")
+    elif N <= 4:
+        return np.fft.fft(x)
+    else:
+        x_even = fft(x[::2])
+        x_odd = fft(x[1::2])
+        factor = np.exp(-2j * np.pi * np.arange(N) / N)
+        odd = factor[:N // 2] * x_odd
+        even_odd = x_even + odd
+        return np.concatenate([even_odd,
+                               x_even + factor[N // 2:] * x_odd])

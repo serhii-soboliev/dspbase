@@ -3,7 +3,7 @@ from math import pi
 
 import numpy as np
 import numpy.testing as npt
-from com.sbk.dspbase.dft import dft, i_dft
+from com.sbk.dspbase.dft import dft, i_dft, dft_complex
 
 
 class TestDFT(unittest.TestCase):
@@ -31,10 +31,20 @@ class TestDFT(unittest.TestCase):
 
     def test_dft_i_dft_equal_1(self):
         x = self.build_sinus()
-
         re, im = dft(x)
         x_restored = i_dft(re, im)
         npt.assert_almost_equal(x, x_restored, decimal=2)
+
+    def test_dft_close_to_np_fft(self):
+        x = self.build_sinus()
+        np.allclose(dft_complex(x), np.fft.fft(x))
+
+    def test_complex_dft_close_to_np_fft(self):
+        x = self.build_sinus()
+        re, im = dft(x)
+        np_dft = np.fft.fft(x)
+        self.assertTrue(np.allclose(re, np.real(np_dft[:len(np_dft)//2])))
+        self.assertTrue(np.allclose(im, np.imag(np_dft[:len(np_dft)//2])))
 
     def build_sinus(self, amplitude=1, freq=10, shift=0, n=64):
         sn = 10000
