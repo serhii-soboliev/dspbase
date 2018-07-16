@@ -2,7 +2,14 @@ import numpy as np
 from math import pi, cos, sin
 
 
-def dft(x):
+def dft(x, result_length=None):
+    if result_length is None:
+        result_length = len(x)
+    else:
+        result_length = max(len(x), result_length)
+    r = np.zeros(result_length)
+    r[:len(x)] = x
+    x = r
     n = len(x)
     dft_len = n // 2
     re = np.zeros(dft_len)
