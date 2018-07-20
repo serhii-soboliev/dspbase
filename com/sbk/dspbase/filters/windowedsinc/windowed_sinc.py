@@ -14,3 +14,9 @@ def blackman_windowed_sinc(cut_off=0.14, kernel_length=100):
     bk = blackman_kernel(filter_length=kernel_length * 10)
     t, x = sinc(kernel_length=kernel_length, cut_off=cut_off)
     return t, x * bk
+
+
+def blackman_windowed_sinc_normalized(cut_off=0.14, kernel_length=100):
+    t, x = blackman_windowed_sinc(kernel_length=kernel_length, cut_off=cut_off)
+    x = x / np.sum(x)
+    return t, x
