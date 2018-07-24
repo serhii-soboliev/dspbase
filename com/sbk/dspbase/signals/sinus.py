@@ -7,7 +7,7 @@ class Sinus:
     def build_sin_waves(sample_rate, *args):
         if len(args) % 2 != 0:
             raise ValueError("Parameters sequence length isn't even")
-        t = arange(0, 1, 1.0 / 1000)
+        t = arange(0, 1, 1.0 / sample_rate)
         s = zeros(sample_rate)
         for i in range(0, len(args), 2):
             amplitude = args[i]
