@@ -8,4 +8,4 @@ class TestSinus(unittest.TestCase):
         pass
 
     def test_build_sinus_wave(self):
-        s = Sinus.build_sin_waves(3,3,4,5)
+        s = Sinus.build_sin_waves(1000,3,3,4,5)
