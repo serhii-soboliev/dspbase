@@ -13,5 +13,5 @@ class Sinus:
             amplitude = args[i]
             frequency = args[i + 1]
             s += amplitude*sin(2*pi*frequency*t)
-        return s
+        return t,s
 
